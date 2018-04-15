@@ -18,26 +18,93 @@ consumes:
 produces:
   - application/json
 paths:
-  /hello:
-    # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
+  /posts:
+    # Controller
+    x-swagger-router-controller: post
     get:
-      description: Returns 'Hello' to the caller
-      # used as the method name of the controller
-      operationId: hello
-      parameters:
-        - name: name
-          in: query
-          description: The name of the person to whom to say hello
-          required: false
-          type: string
+      description: Devuelve lista de Posts
+      # Respuesta exitosa para estado 200 y error
       responses:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
-            $ref: "#/definitions/HelloWorldResponse"
-        # responses may fall through to errors
+            $ref: "#/definitions/GetPostsListResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      description: Agrega nuevo post a la lista
+      parameters:
+        - name: post
+          description: Propiedades de post
+          in:  body
+          required: true
+          schema:
+            $ref: "#/definitions/Post"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /posts/{id}:
+    x-swagger-router-controller: post
+    get:
+      description: Obtiene un post
+      parameters:
+        - name: id
+          type: number
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetPostResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      description: Actualiza un post
+      parameters:
+        - name: id
+          description: ID del post
+          type: number
+          in: path
+          required: true
+        - name: post
+          description: Post a actualizar
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Post"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+      description: Elimina un post
+      parameters:
+        - name: id
+          description: ID del post
+          type: number
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GeneralResponse"
         default:
           description: Error
           schema:
@@ -46,11 +113,58 @@ paths:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
 definitions:
-  HelloWorldResponse:
+  GetPostsListResponse:
     required:
-      - message
+      - posts
     properties:
-      message:
+      posts:
+        type: array
+        items:
+          type: object
+          properties:
+            userId:
+              type: number
+            id:
+              type: number
+            title:
+              type: string
+            body:
+              type: string
+  Post:
+    type: object
+    properties:
+      title:
+        type: string
+        description: Titulo del post
+      body:
+        type: string
+        description: Contenido del post
+    required:
+      - title
+      - body
+  GeneralResponse:
+    type: object
+    properties:
+      success:
+        type: number
+        description: Codigo 1 para exito
+      description:
+        type: string
+        description: Comentario sobre respuesta
+    required:
+      - success
+      - description
+  GetPostResponse:
+    required:
+      - id
+      - title
+      - body
+    properties:
+      id:
+        type: number
+      title:
+        type: string
+      body:
         type: string
   ErrorResponse:
     required:
