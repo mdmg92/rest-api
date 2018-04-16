@@ -22,6 +22,7 @@ paths:
     # Controller
     x-swagger-router-controller: post
     get:
+      operationId: findAll
       description: Devuelve lista de Posts
       # Respuesta exitosa para estado 200 y error
       responses:
@@ -34,6 +35,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
     post:
+      operationId: create
       description: Agrega nuevo post a la lista
       parameters:
         - name: post
@@ -46,7 +48,7 @@ paths:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/GeneralResponse"
+            $ref: "#/definitions/Post"
         default:
           description: Error
           schema:
@@ -54,6 +56,7 @@ paths:
   /posts/{id}:
     x-swagger-router-controller: post
     get:
+      operationId: findById
       description: Obtiene un post
       parameters:
         - name: id
@@ -70,6 +73,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
     put:
+      operationId: update
       description: Actualiza un post
       parameters:
         - name: id
@@ -93,6 +97,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
     delete:
+      operationId: destroy
       description: Elimina un post
       parameters:
         - name: id
@@ -133,6 +138,12 @@ definitions:
   Post:
     type: object
     properties:
+      id:
+        type: number
+        description: id del post
+      userId:
+        type: number
+        description: id del usuario propietario del post
       title:
         type: string
         description: Titulo del post
