@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "d1a4b530-3e82-4ef2-8c4e-57d7ffeb2fa2",
+		"name": "REST-API",
+		"description": "Coleccion de rutas para proyecto de prueba de REST API en nodejs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Obtener Lista de Posts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:10010/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10010",
+					"path": [
+						"posts"
+					]
+				},
+				"description": "Obtiene la lista de posts"
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:10010/posts/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10010",
+					"path": [
+						"posts",
+						"1"
+					]
+				},
+				"description": "Obtiene post por id"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Post",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"string\",\r\n  \"body\": \"string\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:10010/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10010",
+					"path": [
+						"posts"
+					]
+				},
+				"description": "Envia peticion post al servidor"
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar Post",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1,\r\n  \"userId\": 1,\r\n  \"title\": \"string\",\r\n  \"body\": \"string\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:10010/posts/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10010",
+					"path": [
+						"posts",
+						"1"
+					]
+				},
+				"description": "Envia peticion para actualizar post al servidor"
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Post",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:10010/posts/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10010",
+					"path": [
+						"posts",
+						"1"
+					]
+				},
+				"description": "Envia peticion para eliminar post al servidor"
+			},
+			"response": []
+		},
+		{
+			"name": "Auth",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"user\",\n\t\"password\": \"password\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:10010/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "10010",
+					"path": [
+						"auth"
+					]
+				},
+				"description": "Devuelve un JWT para utilizar los recursos protegidos."
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJpc3MiOiJtZG1nLnJlc3QuYXBpIiwiaWF0IjoxNTIzOTc0ODA3fQ.8gUTozVrfYiz0wdCRXB49adEqJ4O0SMPX2q8o6zksgY",
+				"type": "string"
+			}
+		]
+	}
+}

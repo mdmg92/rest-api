@@ -5,7 +5,7 @@ Para probar el codigo, clonar el respositorio y ejecutar los siguientes comandos
 1. ``` npm install ```
 2. ``` swagger project start ```
 
-La documentacion swagger se puede visualizar en el [editor de Swagger](http://editor.swagger.io/#/) con la [configuracion del proyecto]( https://github.com/mdmg92/rest-api/blob/master/api/swagger/swagger.yaml)
+La documentacion swagger se puede visualizar en el [editor de Swagger](http://editor.swagger.io/#/) con la [configuracion del proyecto](https://github.com/mdmg92/rest-api/blob/master/api/swagger/swagger.yaml)
 
 Se define el recurso de posts para el servicio rest. 
 Metodos disponibles:
@@ -20,4 +20,6 @@ Metodos disponibles:
 |/DELETE|posts/{id}|Elimina post. Retorna 1 en caso exitoso*  |
 
 
->*Obs: Los cambios no perssiten en el servidor
+>*Obs: Los cambios no persiten en el servidor
+
+[Postman Collection](https://github.com/mdmg92/rest-api/blob/master/REST-API.postman_collection.json)
