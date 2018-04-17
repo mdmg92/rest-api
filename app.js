@@ -2,10 +2,16 @@
 
 var SwaggerExpress = require('swagger-express-mw');
 var app = require('express')();
+
+const auth = require('./api/helpers/auth');
+
 module.exports = app; // for testing
 
 var config = {
-  appRoot: __dirname // required config
+  appRoot: __dirname, // required config
+  swaggerSecurityHandlers: {
+    Bearer: auth.verifyToken
+  }
 };
 
 SwaggerExpress.create(config, function(err, swaggerExpress) {
