@@ -1,10 +1,8 @@
 'use strict';
 
-var server = require('../../config/server')();
 const axios = require('axios');
 
 const url = "https://my-json-server.typicode.com/mdmg92/rest-api/posts/";
-
 
 module.exports = { findAll, findById, create, destroy, update };
 
