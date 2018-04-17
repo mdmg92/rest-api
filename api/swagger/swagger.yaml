@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   version: "0.0.1"
-  title: Hello World App
+  title: REST API
 # during dev, should point to your local machine
 host: localhost:10010
 # basePath prefixes all resource paths 
@@ -11,13 +11,42 @@ schemes:
   # tip: remove http to make production-grade
   - http
   - https
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Para acceder a la API se requiere un JWT en el header 'Authorization'
 # format of bodies a client can send (Content-Type)
 consumes:
   - application/json
 # format of the responses to the client (Accepts)
 produces:
   - application/json
+security:
+  - Bearer: []
 paths:
+  /auth:
+    x-swagger-router-controller: auth
+    post:
+      operationId: auth
+      description: Autentica usuario para usar la API
+      security: []
+      parameters:
+        - name: authentication
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/Authentication"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Token"
+        "403":
+          description: Access Denied
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /posts:
     # Controller
     x-swagger-router-controller: post
@@ -177,6 +206,24 @@ definitions:
         type: string
       body:
         type: string
+  Authentication:
+    type: object
+    properties:
+      username:
+        type: string
+        description: Nombre de usuario
+      password:
+        type: string
+        description: Password de usuario
+  Token:
+    type: object
+    properties:
+      message:
+        type: string
+        description: Mensaje de la operacion
+      token:
+        type: string
+        description: Token JWT para acceder a rutas protegidas
   ErrorResponse:
     required:
       - message
